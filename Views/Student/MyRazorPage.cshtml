@@ -1,0 +1,37 @@
+@model dynamic
+@{
+    ViewData["Title"] = "My Razor Page";
+}
+
+<h1>My Razor Page</h1>
+
+<div class="card mb-4">
+    <div class="card-header">Current Date and Time</div>
+    <div class="card-body">@DateTime.Now.ToString("F")</div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">Personal Information</div>
+    <div class="card-body">
+        <p><strong>Name:</strong> @Model.Name</p>
+        <p><strong>Roll Number:</strong> @Model.RollNumber</p>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">Multiplication Table of @Model.MultiplicationNumber</div>
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead><tr><th>Expression</th><th>Result</th></tr></thead>
+            <tbody>
+                @for (int i = 1; i <= 10; i++)
+                {
+                    <tr>
+                        <td>@Model.MultiplicationNumber × @i</td>
+                        <td>@(Model.MultiplicationNumber * i)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div> 
