@@ -1,25 +1,18 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /app
 
-# Create a project directory
-RUN mkdir -p /app/WebApp2ByAmrit
-
-# Copy everything to the app directory
-COPY . ./WebApp2ByAmrit/
-
-# Set working directory to the project directory
-WORKDIR /app/WebApp2ByAmrit
-
-# Restore dependencies
+# Copy csproj and restore dependencies
+COPY WebApp2ByAmrit.csproj ./
 RUN dotnet restore
 
-# Build and publish
-RUN dotnet publish -c Release -o /app/publish
+# Copy everything else and build
+COPY . ./
+RUN dotnet publish -c Release -o out
 
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
-COPY --from=build /app/publish .
+COPY --from=build /app/out ./
 
 # Expose port and set entry point
 EXPOSE 80
