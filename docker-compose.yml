@@ -11,4 +11,6 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_URLS=http://+:80;https://+:443
-      - ASPNETCORE_HTTPS_PORT=8081 
+      - ASPNETCORE_HTTPS_PORT=8081
+    volumes:
+      - ./:/app/WebApp2ByAmrit 
